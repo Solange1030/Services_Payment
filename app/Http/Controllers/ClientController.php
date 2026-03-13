@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\App\Models\Transaction;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller

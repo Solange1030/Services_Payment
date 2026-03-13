@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.routes.php';
+require __DIR__.'/client.routes.php';
 /*
 |--------------------------------------------------------------------------
 | API Routes
