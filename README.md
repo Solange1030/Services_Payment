@@ -1,42 +1,50 @@
-# Services_Payment
+# Mini-app de pagamento de serviços
 
-This template should help get you started developing with Vue 3 in Vite.
+Este projeto é dividido em **backend (Laravel)** e **frontend (Vue 3 + Tailwind + Vite)**.
 
-## Recommended IDE Setup
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Recommended Browser Setup
+##  Estrutura do Repositório
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- Backend → Contém a aplicação Laravel (API)
+- Frontend` → Contém a aplicação Vue 3 (Interface do usuário)
 
-## Type Support for `.vue` Imports in TS
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+Dica: cada branch pode conter apenas sua parte (por exemplo `backend` branch só o backend).
 
-## Customize configuration
 
-See [Vite Configuration Reference](https://vite.dev/config/).
 
-## Project Setup
+## Tecnologias
 
-```sh
-npm install
-```
+### Backend
+- Laravel 10
+- PHP 8.1+
+- MySQL
+- Composer (gerenciador de pacotes PHP)
 
-### Compile and Hot-Reload for Development
+### Frontend
+- Vue 3 
+- Tailwind CSS + Flowbite
+- Vite
+- Axios
 
-```sh
-npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
 
-```sh
-npm run build
-```
+## Instalação do Backend (Laravel)
+
+- Clone a branch do backend:
+- git clone -b backend https://github.com/Solange1030/Services_Payment.git
+- cd Services_Payments
+- composer install
+- cp .env.example .env
+- php artisan migrate --seed
+- php artisan serve     // para rodar
+
+
+## Instalação do Frontend (Vue)
+
+- Clone a branch do frontend:
+- git clone -b frontend https://github.com/Solange1030/Services_Payment.git
+- cd Services_Payments
+- npm install
+- npm run dev
