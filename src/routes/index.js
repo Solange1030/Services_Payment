@@ -2,12 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Login from '../views/auth_views/Login.vue'
 import Register from '../views/auth_views/Register.vue'
-import Dashboard from '../pages/Dashboard.vue'
+import Index from '../views/auth_views/Index.vue'
+import IndexClient from '../views/client_views/IndexClient.vue'
+import Transactions from '../views/client_views/Transactions.vue'
 
 const routes = [
   {
     path: '/',
-    redirect: '/dashboard'
+    component: Index
   },
   {
     path: '/login',
@@ -18,8 +20,13 @@ const routes = [
     component: Register
   },
   {
-    path: '/dashboard',
-    component: Dashboard,
+    path: '/index/client',
+    component: IndexClient,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/client/transactions',
+    component: Transactions,
     meta: { requiresAuth: true }
   }
 ]
