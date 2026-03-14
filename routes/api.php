@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.routes.php';
 require __DIR__.'/client.routes.php';
+require __DIR__.'/admin.routes.php';
 /*
 |--------------------------------------------------------------------------
 | API Routes
