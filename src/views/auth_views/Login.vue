@@ -16,7 +16,7 @@
       </h1>
 
       <p class="text-sm text-gray-500 dark:text-gray-400 text-center mb-6">
-        Introduz o teu email e a Palavra-passe
+        Introduz o teu email e a palavra-passe
       </p>
 
       <form @submit.prevent="handleVerifyCredentials" class="flex flex-col gap-5">
@@ -31,22 +31,16 @@
                  focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
         />
 
-        <!-- Código 6 dígitos -->
-        <div class="flex justify-between">
-          <input
-            v-for="(digit, i) in password"
-            :key="i"
-            :id="`password-${i}`"
-            type="password"
-            maxlength="1"
-            v-model="password[i]"
-            @input="handlePasswordChange($event.target.value, i)"
-            class="w-12 h-12 text-center text-lg border rounded-xl border-gray-300 dark:border-gray-600
-                   bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white
-                   focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
-            required
-          />
-        </div>
+        <!-- Senha -->
+        <input
+          type="password"
+          v-model="password"
+          required
+          placeholder="Digite a sua palavra-passe"
+          class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600
+                 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white
+                 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
+        />
 
         <p v-if="error" class="text-red-600 text-sm text-center">{{ error }}</p>
 
@@ -66,7 +60,7 @@
         <!-- Link de registro -->
         <p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
           Ainda não tens conta? 
-          <router-link to="/Auth/signup" class="text-purple-600 hover:underline dark:text-purple-400 font-medium">
+          <router-link to="/register" class="text-purple-600 hover:underline dark:text-purple-400 font-medium">
             Regista-te aqui
           </router-link>
         </p>
@@ -82,7 +76,7 @@ import { loginUser } from "../../api/auth";
 
 const router = useRouter();
 const email = ref("");
-const password = ref(Array(6).fill(""));
+const password = ref("");
 const loading = ref(false);
 const error = ref("");
 
@@ -90,8 +84,8 @@ async function handleVerifyCredentials() {
   loading.value = true;
   error.value = "";
 
-  if (password.value.some((c) => c === "")) {
-    error.value = "Preencha todos os dígitos do código de acesso";
+  if (!email.value || !password.value) {
+    error.value = "Preencha todos os campos";
     loading.value = false;
     return;
   }
@@ -99,7 +93,7 @@ async function handleVerifyCredentials() {
   try {
     const formData = {
       email: email.value,
-      password: password.value.join(""),
+      password: password.value,
     };
 
     const response = await loginUser(formData);
@@ -109,22 +103,14 @@ async function handleVerifyCredentials() {
     if (response.data.user.role === "Cliente") {
       router.push("/index/client/");
     } else if (response.data.user.role === "Admin") {
-      router.push("/Psy/consults");
+      router.push("/index/admin/");
     } else {
       router.push("/dashboard");
     }
   } catch (err) {
-    error.value = err.message || "Erro ao autenticar";
+    error.value = err.response?.data?.message || "Erro ao autenticar";
   } finally {
     loading.value = false;
   }
-}
-
-function handlePasswordChange(value, index) {
-  if (!/^\d?$/.test(value)) return;
-  password.value[index] = value;
-
-  const nextInput = document.getElementById(`password-${index + 1}`);
-  if (value && nextInput) nextInput.focus();
 }
 </script>

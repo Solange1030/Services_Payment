@@ -1,144 +1,169 @@
 <template>
-  <form @submit.prevent="handleSubmit" class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-    <!-- Email -->
-    <div class="relative z-0 w-full mb-5 group">
-      <input
-        type="email"
-        v-model="form.email"
-        id="floating_email"
-        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-        placeholder=" "
-        required
-      />
-      <label
-        for="floating_email"
-        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-      >
-        Endereço de email
-      </label>
-    </div>
+  <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 to-purple-200 dark:from-gray-800 dark:to-gray-900 px-4">
+    <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
+      
+      <!-- Logo -->
+      <div class="flex justify-center mb-6">
+        <img
+          src="../../assets/Logo.jpg"
+          alt="Logo"
+          class="w-32 h-32 rounded-full shadow-lg"
+        />
+      </div>
 
-    <!-- Password -->
-    <div class="relative z-0 w-full mb-5 group">
-      <input
-        type="password"
-        v-model="form.password"
-        id="floating_password"
-        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-        placeholder=" "
-        required
-      />
-      <label
-        for="floating_password"
-        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-      >
-        Palavra-passe
-      </label>
-    </div>
+      <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">
+        Registo Seguro
+      </h1>
 
-    <!-- Confirm Password -->
-    <div class="relative z-0 w-full mb-5 group">
-      <input
-        type="password"
-        v-model="form.confirmPassword"
-        id="floating_repeat_password"
-        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-        placeholder=" "
-        required
-      />
-      <label
-        for="floating_repeat_password"
-        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-      >
-        Confirmar Palavra-passe
-      </label>
-    </div>
+      <p class="text-sm text-gray-500 dark:text-gray-400 text-center mb-6">
+        Preencha os dados para criar sua conta
+      </p>
 
-    <!-- First and Last Name -->
-    <div class="grid md:grid-cols-2 md:gap-6">
-      <div class="relative z-0 w-full mb-5 group">
+      <form @submit.prevent="handleRegister" class="flex flex-col gap-4">
+        <!-- Nome -->
         <input
           type="text"
-          v-model="form.firstName"
-          id="floating_first_name"
-          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
+          v-model="name"
           required
+          placeholder="Nome completo"
+          class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600
+                 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white
+                 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
         />
-        <label
-          for="floating_first_name"
-          class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
-         Nome Completo
-        </label>
-      </div>
 
-      
-    </div>
-
-    <!-- Phone and Company -->
-    <div class="grid md:grid-cols-2 md:gap-6">
-      <div class="relative z-0 w-full mb-5 group">
+        <!-- Email -->
         <input
-          type="tel"
-          v-model="form.phone"
-          id="floating_phone"
-          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
+          type="email"
+          v-model="email"
           required
+          placeholder="Email"
+          class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600
+                 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white
+                 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
         />
-        <label
-          for="floating_phone"
-          class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+
+        <!-- Contacto -->
+        <input
+          type="text"
+          v-model="contact"
+          required
+          placeholder="Contacto"
+          class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600
+                 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white
+                 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
+        />
+
+        <!-- Gênero -->
+        <select
+          v-model="gender"
+          required
+          class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600
+                 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white
+                 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
         >
-          Contacto
-        </label>
-      </div>
+          <option value="" disabled>Gênero</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Feminino">Feminino</option>
+          <option value="Outro">Outro</option>
+        </select>
 
-        <div class="flex items-center mb-4">
-            <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border border-default appearance-none">
-            <label for="default-radio-1" class="select-none ms-2 text-sm font-medium text-heading">Feminino</label>
-        </div>
-        <div class="flex items-center">
-            <input checked id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border border-default appearance-none">
-            <label for="default-radio-2" class="select-none ms-2 text-sm font-medium text-heading">Masculino</label>
-        </div>
+       
+        <input
+          type="password"
+          v-model="password"
+          required
+          placeholder="Palavra-passe"
+          class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600
+                 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white
+                 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
+        />
+
+       >
+        <input
+          type="password"
+          v-model="passwordConfirm"
+          required
+          placeholder="Confirme a palavra-passe"
+          class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600
+                 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white
+                 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
+        />
+
+        <p v-if="error" class="text-red-600 text-sm text-center">{{ error }}</p>
+
+        <button
+          type="submit"
+          :disabled="loading"
+          class="w-full py-3 text-white font-semibold rounded-xl
+                 bg-gradient-to-r from-purple-500 to-blue-500
+                 hover:from-purple-600 hover:to-blue-600
+                 focus:outline-none focus:ring-4 focus:ring-purple-300
+                 transition transform hover:scale-105"
+        >
+          {{ loading ? "Registrando..." : "Registrar" }}
+        </button>
+
+        
+        <p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
+          Já tem conta? 
+          <router-link to="/login" class="text-purple-600 hover:underline dark:text-purple-400 font-medium">
+            Faça login
+          </router-link>
+        </p>
+      </form>
     </div>
-
-    <!-- Submit Button -->
-    <button
-      type="submit"
-      class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none shadow-md"
-    >
-      Enviar
-    </button>
-  </form>
+  </div>
 </template>
 
-<script setup id="j6u2m1">
-import { reactive } from 'vue'
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { registerUser } from "../../api/auth"; 
 
-const form = reactive({
-  email: '',
-  password: '',
-  confirmPassword: '',
-  firstName: '',
-  lastName: '',
-  phone: '',
-  company: ''
-})
+const router = useRouter();
+const name = ref("");
+const email = ref("");
+const contact = ref("");
+const gender = ref("");
+const password = ref("");
+const passwordConfirm = ref("");
+const loading = ref(false);
+const error = ref("");
 
-const handleSubmit = () => {
-  if(form.password !== form.confirmPassword){
-    alert('Passwords do not match!')
-    return
+async function handleRegister() {
+  error.value = "";
+  if (!name.value || !email.value || !contact.value || !gender.value || !password.value || !passwordConfirm.value) {
+    error.value = "Preencha todos os campos";
+    return;
   }
-  console.log('Form submitted:', form)
-  
+
+  if (password.value !== passwordConfirm.value) {
+    error.value = "As senhas não coincidem";
+    return;
+  }
+
+  loading.value = true;
+
+  try {
+    const formData = {
+      name: name.value,
+      email: email.value,
+      contact: contact.value,
+      gender: gender.value,
+      password: password.value,
+      password_confirmation: passwordConfirm.value,
+    };
+
+    const response = await registerUser(formData);
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("user_id", response.data.user.id);
+
+    
+    router.push("/index/client/");
+  } catch (err) {
+    error.value = err.response?.data?.message || "Erro ao registrar";
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
-
-<style scoped>
-
-</style>
