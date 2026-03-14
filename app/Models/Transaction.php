@@ -13,6 +13,7 @@ class Transaction extends Model
         'amount',
         'description',
         'client_id',
+        'service'
     ];
 
     public function client()

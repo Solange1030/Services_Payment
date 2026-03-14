@@ -70,18 +70,23 @@ class AuthController extends Controller
             $credentials = $request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
+                $user = Auth::user();
+
+                
+                $token = $user->createToken('api_token')->plainTextToken;
 
                 return response()->json([
                     'status' => true,
                     'message' => 'Login realizado com sucesso',
-                    'user' => Auth::user()
+                    'user' => $user,
+                    'token' => $token
                 ]);
             }
 
             return response()->json([
                 'status' => false,
                 'message' => 'Credenciais inválidas'
-            ],401);
+            ], 401);
         }
 
 
